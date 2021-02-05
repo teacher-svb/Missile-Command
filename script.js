@@ -1,6 +1,10 @@
 let player = null;
 let gun = null;
 let enemyMissilesGroup = null;
+let city1 = null;
+let city2 = null;
+let points = 0;
+let timePoints = 0;
 
 // how fast the player can move
 let playerSpeed = 10;
@@ -35,6 +39,14 @@ function setup() {
     gun = createSprite(width / 2, height - 50, 25, 25);
 
     enemyMissilesGroup = new Group();
+
+    city1 = createSprite(0 + 100, height - 10, 100, 20);
+    city1.draw = DrawCity;
+    city1["lifepoints"] = 3;
+
+    city2 = createSprite(width - 100, height - 10, 100, 20);
+    city2.draw = DrawCity;
+    city2["lifepoints"] = 3;
 }
 
 function draw() {
@@ -44,8 +56,58 @@ function draw() {
     Shoot();
 
     EnemyShootsMissile();
+    ShowLifePoints();
+    ShowPlayerPoints();
+
+    AddTimePoints();
 
     drawSprites();
+}
+
+function AddTimePoints() {
+    if (city1.lifepoints > 0 || city2.lifepoints > 0) {
+        timePoints = floor(millis() / 100);
+    }
+}
+
+function ShowPlayerPoints() {
+    let pointsTotal = points + timePoints;
+
+    fill('white');
+    textSize(44);
+    text(pointsTotal.toString(), width / 2, 50);
+}
+
+function ShowLifePoints() {
+    ShowLifePointsOfCity(city1);
+    ShowLifePointsOfCity(city2);
+}
+
+function ShowLifePointsOfCity(city) {
+    let cityLifePoints = city.lifepoints.toString();
+    cityLifePoints += "/3";
+
+    fill('white');
+    textSize(24);
+    text(cityLifePoints, city.position.x, city.position.y - 20);
+}
+
+function DrawCity() {
+    rect(0, 0, this.width, this.height);
+
+    this.overlap(enemyMissilesGroup, CityIsHit);
+}
+
+function CityIsHit(city, enemyMissile) {
+    city.lifepoints--;
+
+    CreateExplosion(enemyMissile.position.x, enemyMissile.position.y);
+
+    if (city.lifepoints <= 0) {
+        city.remove();
+    }
+
+    enemyMissile.remove();
 }
 
 function EnemyShootsMissile() { 
@@ -102,7 +164,6 @@ function DrawEnemyMissile() {
     let distance = p5.Vector.dist(this.position, this.goal);
     if (distance < 5) { 
         this.remove();
-        CreateExplosion(this.goal.x, this.goal.y);
     }
 }
 
@@ -130,6 +191,13 @@ function DrawExplosion() {
 
 function EnemyMissileIsHit(explosion, enemyMissile) { 
     enemyMissile.remove();
+    GainPoints(100);
+}
+
+function GainPoints(amount) {
+    if (city1.lifepoints > 0 || city2.lifepoints > 0) {
+        points += amount;
+    }
 }
 
 function DrawPlayer() {
