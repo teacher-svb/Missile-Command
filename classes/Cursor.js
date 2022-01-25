@@ -5,13 +5,17 @@ class Cursor extends GameObject {
         this.#speed = speed;
     }
 
-    draw() {
+    Update() {
         noFill();
         stroke(255, 0, 0);
-        strokeWeight(4);
+
+        if (this.overlap(Game.GetInstance().GetCities())) {
+            fill(0, 255, 0);
+        }
+        strokeWeight(2);
+        circle(0, 0, 3);
         circle(0, 0, this.width);
 
-        circle(0, 0, 4);
 
 
         if (keyIsDown(DOWN_ARROW)) {
@@ -25,6 +29,19 @@ class Cursor extends GameObject {
             this.position.x -= this.#speed;
         }
         if (keyIsDown(RIGHT_ARROW)) {
+            this.position.x += this.#speed;
+        }
+
+        // if (this.position.y > height * 2/3) {
+        //     this.position.y -= this.#speed;
+        // }
+        if (this.position.y < 0) {
+            this.position.y += this.#speed;
+        }
+        if (this.position.x > width) {
+            this.position.x -= this.#speed;
+        }
+        if (this.position.x < 0) {
             this.position.x += this.#speed;
         }
     }

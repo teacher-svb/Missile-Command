@@ -1,20 +1,55 @@
-let cursor = null;
-let gun = null;
+let game = null;
+
+
+function Test() {
+
+}
 
 function setup() {
     createCanvas(800, 400);
-    background(0);
 
-    circle(50, 50, 100);
-
-    cursor = new Cursor(100, 100, 50, 1);
-    gun = new Gun(width/2, height - 50, 50, cursor);
-
-    // cursor.Init();
+    game = Game.GetInstance();
 }
 
 function draw() {
-    angleMode(DEGREES);
-    background(0);
-    drawSprites();
+    game.Update();
 }
+
+
+// class Parent {
+//     #privateFoo;
+//     constructor() {
+//         console.log(this.__proto__);
+//         let test = {
+//             draw: this.Update
+//         };
+//         // this.__proto__ = {...this.__proto__};
+//         Object.assign(this.__proto__, test);
+//         // console.log({...this.__proto__});
+//         console.log(this.__proto__);
+
+//         this.#privateFoo = "foo";
+//     }
+
+//     GetPrivateFoo() {
+//         return this.#privateFoo;
+//     }
+
+//     bar() {
+//         console.log(this.GetPrivateFoo());
+//         console.log("bar");
+//     }
+// }
+
+// class Child extends Parent {
+//     constructor() {
+//         super();
+//     }
+
+//     bar() {
+//         super.bar();
+//     }
+// }
+
+// let c = new Child();
+// c.bar();
