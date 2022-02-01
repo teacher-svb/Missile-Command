@@ -16,12 +16,16 @@ class Gun extends MissileSpawner {
         this.rotation = degrees(dir.heading());
 
         if (keyIsDown(32)) {
-            super.Shoot(this.position.x,
-                        this.position.y,
-                        this.#cursor.position.x,
-                        this.#cursor.position.y,
-                        4,
-                        5);
+            if (this.GetTimer() >= 1000 / this.GetShootRate()) {
+                this.ResetTimer();
+                let missile = super.Shoot(this.position.x,
+                                          this.position.y,
+                                          this.#cursor.position.x,
+                                          this.#cursor.position.y,
+                                          4,
+                                          5);
+                missile["name"] = "friendly";
+            }
         }
     }
 }

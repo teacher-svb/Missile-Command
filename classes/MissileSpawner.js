@@ -2,21 +2,25 @@ class MissileSpawner extends GameObject {
     #timer;
     #shootRate;
     #missiles;
+    #counter;
     constructor(x, y, size) {
         super(x, y, size, size);
         this.#timer = 0;
         this.#shootRate = 4;
+        // this.#missiles = [];
+        this.#counter = 0;
         this.#missiles = new Group();
     }
 
     Shoot(fromx, fromy, goalx, goaly, speed, size) {
-        console.log(fromx);
+        this.#counter = this.#counter + 1;
+        let missile = new Missile(fromx, fromy, size, speed, goalx, goaly);
+        missile["id"] = this.#counter;
+        // this.#missiles.push(missile);
+        this.#missiles.add(missile);
 
-        if (this.#timer >= 1000 / this.#shootRate) {
-            this.#timer = 0;
-            let missile = new Missile(fromx, fromy, size, speed, goalx, goaly);
-            this.#missiles.add(missile);
-        }
+        console.log(missile.groups);
+        return missile;
     }
 
     GetShootRate()  { return this.#shootRate; }

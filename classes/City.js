@@ -7,9 +7,6 @@ class City extends GameObject {
 
     Update() {
         fill(this.#color);
-        if (this.overlap(Game.GetInstance().GetCursor())) {
-            fill(0, 255, 0);
-        }
         rect(0, 0, this.width, this.height);
     }
 }

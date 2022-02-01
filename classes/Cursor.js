@@ -8,10 +8,7 @@ class Cursor extends GameObject {
     Update() {
         noFill();
         stroke(255, 0, 0);
-
-        if (this.overlap(Game.GetInstance().GetCities())) {
-            fill(0, 255, 0);
-        }
+        
         strokeWeight(2);
         circle(0, 0, 3);
         circle(0, 0, this.width);
@@ -32,9 +29,9 @@ class Cursor extends GameObject {
             this.position.x += this.#speed;
         }
 
-        // if (this.position.y > height * 2/3) {
-        //     this.position.y -= this.#speed;
-        // }
+        if (this.position.y > height * 2/3) {
+            this.position.y -= this.#speed;
+        }
         if (this.position.y < 0) {
             this.position.y += this.#speed;
         }

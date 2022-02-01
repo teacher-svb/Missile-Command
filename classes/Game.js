@@ -11,7 +11,6 @@ class Game {
 
     #cursor;
     #gun;
-    #gun2;
     #cities;
     #enemyMissileSpawner;
     #allGameObjects;
@@ -20,10 +19,10 @@ class Game {
 
     #Init() {
         this.#allGameObjects = new Group();
+        // new Missile(100, 0, 5, 1, 100, 200);
 
         this.#cursor = new Cursor(100, 100, 30, 8);
         this.#gun = new Gun(width/2, height - 50, 50, this.#cursor);
-        // this.#gun2 = new Gun(width/2, height - 50, 50, this.#cursor);
 
         this.#cities = new Group();
         this.#cities.add(new City(100, 50, 'red'));
@@ -34,6 +33,7 @@ class Game {
         this.#cities.add(new City(700, 50, 'cyan'));
 
         this.#enemyMissileSpawner = new EnemyMissileSpawner();
+
     }
 
     GetCities() {
@@ -45,8 +45,8 @@ class Game {
     }
 
     AddGameObject(gameObject) {
-        this.#allGameObjects.add(gameObject);
         allSprites.add(gameObject);
+        this.#allGameObjects.add(gameObject);
     }
 
     Update() {

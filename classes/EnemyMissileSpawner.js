@@ -1,23 +1,19 @@
-class EnemyMissileSpawner {
-    #timer;
-    #shootRate;
-    #missiles;
+class EnemyMissileSpawner extends MissileSpawner {
     constructor() {
-        this.#timer = 0;
-        this.#shootRate = .5;
-        this.#missiles = new Group();
+        super(0, 0, 0);
     }
 
     Update() {
-        this.#timer += deltaTime;
-        if (this.#timer >= 1000 / this.#shootRate) {
-            this.#timer = 0;
+        super.Update();
+        
+        if (this.GetTimer() >= 10000 / this.GetShootRate()) {
+            this.ResetTimer();
 
             let randomXPosStart = random(0, width);
             let randomXPosEnd = random(0, width);
 
-            let missile = new Missile(randomXPosStart, 0, 5, 2, randomXPosEnd, height);
-            this.#missiles.add(missile);
+            let missile = this.Shoot(randomXPosStart, 0, randomXPosEnd, height, 2, 5);
+            missile["name"] = "enemy";
         }
     }
 }

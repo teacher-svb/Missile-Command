@@ -1,6 +1,5 @@
 class Explosion extends GameObject {
     #growSpeed;
-    #maxSize;
     
     constructor(x, y, growSpeed, maxSize) {
         super(x, y, 1, 1);
