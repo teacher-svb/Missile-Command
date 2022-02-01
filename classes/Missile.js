@@ -10,6 +10,8 @@ class Missile extends GameObject {
         let dir = p5.Vector.sub(this.#goal, createVector(x, y));
         this.setSpeed(this.#speed, degrees(dir.heading()));
         this.rotation = degrees(dir.heading());
+
+        this.setDefaultCollider();
     }
 
     Update() {

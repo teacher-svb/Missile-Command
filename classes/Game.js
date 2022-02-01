@@ -49,6 +49,8 @@ class Game {
         this.#allGameObjects.add(gameObject);
     }
 
+    GetAllGameObjects() {return this.#allGameObjects; }
+
     Update() {
         background(0);
         this.#allGameObjects.draw();

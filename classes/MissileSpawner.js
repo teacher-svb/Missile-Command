@@ -7,7 +7,6 @@ class MissileSpawner extends GameObject {
         super(x, y, size, size);
         this.#timer = 0;
         this.#shootRate = 4;
-        // this.#missiles = [];
         this.#counter = 0;
         this.#missiles = new Group();
     }
@@ -19,7 +18,6 @@ class MissileSpawner extends GameObject {
         // this.#missiles.push(missile);
         this.#missiles.add(missile);
 
-        console.log(missile.groups);
         return missile;
     }
 
