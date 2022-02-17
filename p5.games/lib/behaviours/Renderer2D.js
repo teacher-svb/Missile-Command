@@ -1,7 +1,13 @@
 class Renderer2D extends Behaviour {
+    #color;
     constructor() {
         super();
         this.unique = true;
+        this.#color = color(255);
+    }
+
+    set color(value) {
+        this.#color = value;
     }
 
     Update() {
@@ -10,6 +16,7 @@ class Renderer2D extends Behaviour {
 
         push();
 
+        fill(this.#color);
         rotate(this.rotation);
         scale(this.scale.x, this.scale.y);
 

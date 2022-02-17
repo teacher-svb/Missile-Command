@@ -25,6 +25,10 @@ class Behaviour {
         return this.#unique;
     }
 
+    get boundingBox() {
+        return this.#gameObject.boundingBox;
+    }
+
     set unique(value) {
         this.#unique = value;
     }
@@ -40,6 +44,8 @@ class Behaviour {
     get gameObject() {
         return this.#gameObject;
     }
+
+    Collide(collider, other) {}
 
     Update() {}
 }
