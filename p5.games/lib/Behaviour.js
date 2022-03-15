@@ -5,6 +5,8 @@ class Behaviour {
         this.#unique = false;
     }
 
+    Init() { }
+
     get position() {
         return this.#gameObject.position;
     }

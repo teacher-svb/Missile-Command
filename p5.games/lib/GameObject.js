@@ -54,6 +54,7 @@ class GameObject {
         }
 
         behaviour.gameObject = this;
+        behaviour.Init();
 
         this.#behaviours.push(behaviour);
     }

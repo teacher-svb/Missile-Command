@@ -6,18 +6,18 @@ let fr = 0;
 function setup() {
     createCanvas(400, 400);
     let player = new GameObject(100, 100, 50, 50);
+    player.AddBehaviour(new Collider2D());
     player.AddBehaviour(new Shape(ShapeType.CIRCLE));
     player.AddBehaviour(new Renderer2D());
     player.AddBehaviour(new PlayerController(.1));
-    player.AddBehaviour(new Collider2D());
     player.boundingBox.shapeType = ShapeType.CIRCLE;
     game.AddGameObject(player);
     
-    let object = new GameObject(200, 150, 50, 50);
-    object.AddBehaviour(new Shape(ShapeType.CIRCLE));
-    object.AddBehaviour(new Renderer2D());
+    let object = new GameObject(50, 150, 200, 20);
     object.AddBehaviour(new Collider2D());
-    object.boundingBox.shapeType = ShapeType.CIRCLE;
+    object.AddBehaviour(new Shape(ShapeType.RECT));
+    object.AddBehaviour(new Renderer2D());
+    object.boundingBox.shapeType = ShapeType.RECT;
     game.AddGameObject(object);
 }
 
