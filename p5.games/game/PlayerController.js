@@ -1,5 +1,12 @@
 class PlayerController extends Behaviour {
     #speed;
+    #movementVector = {
+        x: 0,
+        y: 0
+    };
+
+    #gravity = .01;
+
     constructor(speed) {
         super();
         this.#speed = speed;
@@ -7,6 +14,14 @@ class PlayerController extends Behaviour {
 
     Collide(collider, other) {
         super.Collide(collider, other);
+        this.#movementVector.x *= 0;
+        this.#movementVector.y *= -1;
+
+        // this.position.x -= this.#movementVector.x;
+        // this.position.y -= this.#movementVector.y + (this.#gravity > 0 ? this.#gravity : .1);
+
+        // if (this.#gravity > 0)
+            this.#gravity = 0;
 
         let renderer = this.gameObject.GetBehaviourOfType(new Renderer2D());
         renderer.color = color(255, 0, 0);
@@ -15,32 +30,26 @@ class PlayerController extends Behaviour {
     Update() {
         super.Update();
 
-        if (keyIsDown(DOWN_ARROW)) {
-            this.position.y += this.#speed * deltaTime;
-        }
+        this.position.x += this.#movementVector.x;
+        this.position.y += this.#movementVector.y + this.#gravity;
+
+        this.#movementVector = {
+            x: 0,
+            y: 0
+        };
+
         if (keyIsDown(UP_ARROW)) {
-            this.position.y -= this.#speed * deltaTime;
+            this.#gravity = -3;
         }
 
         if (keyIsDown(LEFT_ARROW)) {
-            this.position.x -= this.#speed * deltaTime;
+            this.#movementVector.x = -this.#speed * deltaTime;
         }
         if (keyIsDown(RIGHT_ARROW)) {
-            this.position.x += this.#speed * deltaTime;
+            this.#movementVector.x = this.#speed * deltaTime;
         }
 
-        if (this.position.y > height * 2/3) {
-            this.position.y -= this.#speed * deltaTime;
-        }
-        if (this.position.y < 0) {
-            this.position.y += this.#speed * deltaTime;
-        }
-        if (this.position.x > width) {
-            this.position.x -= this.#speed * deltaTime;
-        }
-        if (this.position.x < 0) {
-            this.position.x += this.#speed * deltaTime;
-        }
+        this.#gravity += .05;
         
         let renderer = this.gameObject.GetBehaviourOfType(new Renderer2D());
         renderer.color = color(255);

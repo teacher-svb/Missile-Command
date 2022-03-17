@@ -20,13 +20,16 @@ class Renderer2D extends Behaviour {
         rotate(this.rotation);
         scale(this.scale.x, this.scale.y);
 
-
-        switch(shape.shapeType) {
+        switch (shape.shapeType) {
             case ShapeType.RECT: 
-                rect(this.position.x, this.position.y, this.size.x, this.size.y);
+                beginShape();
+                shape.vertices.forEach(v => vertex(this.position.x + v.x, this.position.y + v.y));
+                endShape();
                 break;
             case ShapeType.CIRCLE: 
-                circle(this.position.x, this.position.y, this.size.x);
+                beginShape();
+                shape.vertices.forEach(v => vertex(this.position.x + v.x, this.position.y + v.y));
+                endShape();
                 break;
         }
 
