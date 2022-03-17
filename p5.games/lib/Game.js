@@ -6,7 +6,6 @@ class Game {
     static GetInstance() {
         if (Game.#INSTANCE == undefined) {
             Game.#INSTANCE = new Game();
-            Game.#INSTANCE.#Init();
         }
         return Game.#INSTANCE;
     }
@@ -46,9 +45,6 @@ class Game {
                 collider.gameObject.Collide(collider, other);
             }
         }
-    }
-
-    #Init() {
     }
 
     Update() {

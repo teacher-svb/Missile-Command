@@ -5,6 +5,13 @@ class Gun extends MissileSpawner {
         this.#cursor = cursor;
     }
 
+    Shoot(fromx, fromy, goalx, goaly, speed, size) {
+        let missile = new Missile(fromx, fromy, size, speed, goalx, goaly);
+        this.Missiles.add(missile);
+
+        return missile;
+    }
+
     Update() {
         super.Update();
 
@@ -15,9 +22,9 @@ class Gun extends MissileSpawner {
         this.rotation = degrees(dir.heading());
 
         if (keyIsDown(32)) {
-            if (this.GetTimer() >= 1000 / this.GetShootRate()) {
+            if (this.Timer >= 1000 / this.ShootRate) {
                 this.ResetTimer();
-                let missile = super.Shoot(this.position.x,
+                let missile = this.Shoot(this.position.x,
                                           this.position.y,
                                           this.#cursor.position.x,
                                           this.#cursor.position.y,

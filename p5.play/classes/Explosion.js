@@ -13,7 +13,7 @@ class Explosion extends GameObject {
         circle(0, 0, this.width);
         this.setCollider("circle", 0, 0, this.width / 2);
 
-        this.overlap(Game.GetInstance().GetAllGameObjects(), this.Collided);
+        this.overlap(MissileCommand.GetAllGameObjects(), this.Collided);
     }
 
     Collided(me, other) {

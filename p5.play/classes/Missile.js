@@ -4,6 +4,7 @@ class Missile extends GameObject {
     
     constructor(x, y, size, speed, goalx, goaly) {
         super(x, y, size, size);
+        
         this.#speed = speed;
         this.#goal = createVector(goalx, goaly);
         

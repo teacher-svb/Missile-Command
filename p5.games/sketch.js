@@ -4,11 +4,12 @@ let timer = 0;
 let fr = 0;
 
 function setup() {
-    createCanvas(400, 400);
+    createCanvas(800, 400);
+    
     let player = new GameObject(100, 100, 50, 50);
     player.AddBehaviour(new Shape(ShapeType.CIRCLE));
     player.AddBehaviour(new Renderer2D());
-    player.AddBehaviour(new PlayerController(.1));
+    player.AddBehaviour(new PlayerController(.5));
     player.AddBehaviour(new Collider2D());
     player.boundingBox.shapeType = ShapeType.CIRCLE;
     game.AddGameObject(player);
@@ -21,9 +22,18 @@ function setup() {
     game.AddGameObject(object);
 }
 
+let x = 100;
+
 function draw() {
-    timer += deltaTime;
     background(0);
+
+    DrawFPSCounter();
+
+    game.Update();
+}
+
+function DrawFPSCounter() {
+    timer += deltaTime;
     
     if (timer > 200) {
         fr = frameRate();
@@ -32,6 +42,4 @@ function draw() {
     textSize(12);
     fill(255);
     text(floor(fr), 5, 15);
-
-    game.Update();
 }

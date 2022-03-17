@@ -3,10 +3,17 @@ class EnemyMissileSpawner extends MissileSpawner {
         super(0, 0, 0);
     }
 
+    Shoot(fromx, fromy, goalx, goaly, speed, size) {
+        let missile = new Missile(fromx, fromy, size, speed, goalx, goaly);
+        this.Missiles.add(missile);
+
+        return missile;
+    }
+
     Update() {
         super.Update();
         
-        if (this.GetTimer() >= 10000 / this.GetShootRate()) {
+        if (this.Timer >= 10000 / this.ShootRate) {
             this.ResetTimer();
 
             let randomXPosStart = random(0, width);

@@ -24,6 +24,8 @@ class GameObject {
         this.position = createVector(x, y);
         this.newPosition = createVector(x, y);
         this.previousPosition = createVector(x, y);
+        this.width = width;
+        this.height = height;
         this.velocity = createVector(0, 0);
         this.groups = [];
         this.touching = {};
@@ -34,7 +36,7 @@ class GameObject {
         this.shapeColor = color(random(255), random(255), random(255));
 
         this.depth = allSprites.maxDepth() + 1;
-        Game.GetInstance().AddGameObject(this);
+        GameCanvas.GetInstance().AddGameObject(this);
     }
 
     Update() {
